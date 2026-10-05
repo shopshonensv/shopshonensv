@@ -67,7 +67,7 @@ input,select{font:inherit;color:var(--ink)}
 .hero-copy{min-width:0}
 .hero-kicker{display:inline-flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px;background:var(--ink);color:var(--cream);padding:6px 14px;border-radius:999px;font-weight:700;font-size:.85rem;letter-spacing:.02em}
 .hero-kicker span{color:var(--sun);font-weight:800}
-.hero-title{font-family:var(--f-display);font-weight:400;font-size:clamp(2.4rem,7vw,5.2rem);line-height:1.02;margin:0 0 24px;text-wrap:balance;display:flex;flex-wrap:wrap;gap:.05em .28em;text-shadow:4px 4px 0 var(--ink);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
+.hero-title{font-family:var(--f-display);font-weight:400;font-size:clamp(2.2rem,7vw,5.2rem);line-height:1.02;margin:0;text-wrap:balance;display:flex;flex-wrap:wrap;gap:.05em .28em;text-shadow:4px 4px 0 var(--ink);-webkit-text-stroke:2px var(--ink);paint-order:stroke fill}
 .hero-title .w{display:inline-block;animation:pop .6s cubic-bezier(.2,1.6,.4,1) both;animation-delay:calc(.35s + var(--i)*.12s)}
 .hero-title .hl{color:var(--sun)}
 .hero-title .hl2{color:var(--cream)}
@@ -111,7 +111,8 @@ input,select{font:inherit;color:var(--ink)}
 
 .toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:12px}
 .search{flex:1 1 280px;display:flex;align-items:center;gap:8px;border:var(--b);border-radius:999px;background:var(--panel);padding:0 16px;min-height:48px}
-.search input{flex:1;border:0;background:transparent;min-width:0;padding:10px 0;font-size:1rem}
+.search{min-width:0}
+.search input{flex:1;width:100%;border:0;background:transparent;min-width:0;padding:10px 0;font-size:1rem}
 .search input:focus{outline:none}
 .search:focus-within{box-shadow:0 0 0 3px var(--orange)}
 .only-stock{display:flex;gap:8px;align-items:center;font-weight:700}
@@ -139,7 +140,7 @@ input,select{font:inherit;color:var(--ink)}
 .stock-pill.low{background:#ffe1c7}
 .card-more{display:none;margin:0 12px 12px}
 .card.sel .card-more{display:flex}
-.badge-out{position:absolute;top:12px;left:-6px;background:var(--red);color:#fff;font-family:var(--f-display);font-size:1rem;padding:4px 14px;border:var(--b);transform:rotate(-8deg);box-shadow:var(--sh-sm);z-index:2}
+.badge-out{position:absolute;top:12px;left:8px;background:var(--red);color:#fff;font-family:var(--f-display);font-size:1rem;padding:4px 14px;border:var(--b);transform:rotate(-8deg);box-shadow:var(--sh-sm);z-index:2}
 .card.out .card-img img{filter:grayscale(1) contrast(.9);opacity:.6}
 .ph .code-tag{display:none}
 .code-tag{position:absolute;right:8px;bottom:8px;background:var(--ink);color:var(--cream);font-size:.7rem;font-weight:800;padding:2px 7px;border-radius:6px;letter-spacing:.04em}
@@ -379,7 +380,9 @@ section[id]{scroll-margin-top:90px}
 .contact-intro{color:#fff;min-width:0}
 .contact-title{font-family:var(--f-display);font-weight:400;font-size:clamp(2.2rem,6vw,4rem);line-height:1;margin:0 0 14px;-webkit-text-stroke:2px var(--ink);paint-order:stroke fill;text-shadow:4px 4px 0 var(--ink);color:var(--sun)}
 .contact-lead{font-size:1.08rem;max-width:42ch;margin:0 0 16px}
-.contact-mascot{width:min(220px,60%);height:auto;aspect-ratio:640/636;object-fit:contain;filter:drop-shadow(5px 6px 0 rgba(20,32,42,.5));animation:float 3.2s ease-in-out infinite}
+.wa-link{margin:0 0 18px;gap:10px;text-align:left}
+.wa-link b{font-variant-numeric:tabular-nums;white-space:nowrap}
+.contact-mascot{display:block;width:min(220px,60%);height:auto;aspect-ratio:640/636;object-fit:contain;filter:drop-shadow(5px 6px 0 rgba(20,32,42,.5));animation:float 3.2s ease-in-out infinite}
 .contact-form,.contact-done{background:var(--panel);border:var(--b);border-radius:18px;box-shadow:8px 8px 0 var(--ink);padding:22px;display:flex;flex-direction:column;gap:4px;min-width:0}
 .contact-done{gap:10px}
 .contact-done-title{font-family:var(--f-display);font-weight:400;font-size:1.6rem;margin:0}
@@ -401,6 +404,27 @@ section[id]{scroll-margin-top:90px}
 @media (max-width:720px){
   .map{min-height:260px}
   section[id]{scroll-margin-top:120px}
+}
+/* Celular: que ningún texto se corte */
+@media (max-width:520px){
+  .cat-tab{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;row-gap:2px;padding:12px}
+  .cat-num{grid-row:auto;font-size:1.2rem}
+  .cat-name{font-size:1.1rem;overflow-wrap:anywhere}
+  .cat-meta{font-size:.8rem}
+  .chips{flex-wrap:wrap;overflow:visible}
+  .search input{font-size:16px}
+  .card-row{flex-wrap:wrap;row-gap:4px}
+  .card-name{overflow-wrap:anywhere}
+  .line-meta{flex-wrap:wrap}
+  .sum-row{flex-wrap:wrap}
+  .hours{grid-template-columns:minmax(0,1fr)}
+  .hours dd{margin-bottom:6px}
+  .wa-link{white-space:normal}
+  .wa-link b{white-space:nowrap}
+  .bubble{font-size:.78rem;padding:8px 12px;right:4px;white-space:normal;max-width:60%;text-align:center}
+  .section-title{overflow-wrap:anywhere}
+  .soon-msg{overflow-wrap:anywhere}
+  .d-name,.done-title,.contact-done-title{overflow-wrap:anywhere}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}

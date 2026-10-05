@@ -6,7 +6,7 @@ window.SS_CONFIG = {
   API_URL: "https://script.google.com/macros/s/AKfycbyo4E2vZToqcFR-dyWV5SO5jJ2BJWu9Yz3wZBOFU-dcGLCYkZ5Ik9kxxeMjuAXJiSVa/exec",
 
   // Número de WhatsApp del negocio, con código de país y sin signos. Ej.: "50370001234"
-  WHATSAPP_NEGOCIO: "",
+  WHATSAPP_NEGOCIO: "50366701511",
 
   // Costos de envío
   ENVIO_SAN_SALVADOR: 2.50,

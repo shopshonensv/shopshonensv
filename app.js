@@ -275,12 +275,13 @@
     $("#cartTotal").textContent = money(cartSubtotal());
     $("#goCheckout").disabled = !lines.length;
   }
-  let drawerT;
+  let drawerT, drawerHideT;
   function openDrawer(msg) {
     renderCart();
     const d = $("#drawer");
     lastFocus = document.activeElement;
-    $("#drawerBack").hidden = false; d.classList.add("open"); d.removeAttribute("inert"); d.setAttribute("aria-hidden", "false");
+    clearTimeout(drawerHideT);
+    $("#drawerBack").hidden = false; d.hidden = false; void d.offsetWidth; d.classList.add("open"); d.removeAttribute("inert"); d.setAttribute("aria-hidden", "false");
     document.body.classList.add("locked");
     const t = $("#drawerToast");
     if (msg) { t.textContent = msg; t.classList.add("show"); clearTimeout(drawerT); drawerT = setTimeout(() => t.classList.remove("show"), 2600); }
@@ -289,6 +290,7 @@
   function closeDrawer(restore = true) {
     const d = $("#drawer");
     d.classList.remove("open"); d.setAttribute("inert", ""); d.setAttribute("aria-hidden", "true");
+    clearTimeout(drawerHideT); drawerHideT = setTimeout(() => { if (!d.classList.contains("open")) d.hidden = true; }, 350);
     $("#drawerBack").hidden = true;
     if (!anyOpen()) document.body.classList.remove("locked");
     if (restore && lastFocus && lastFocus.focus) lastFocus.focus();
@@ -516,6 +518,13 @@
 
   // ---------- contacto ----------
   function setupContact() {
+    if (CFG.WHATSAPP_NEGOCIO) {
+      const n = String(CFG.WHATSAPP_NEGOCIO).replace(/\D/g, "");
+      const wa = $("#ctWa");
+      wa.href = "https://wa.me/" + n + "?text=" + encodeURIComponent("Hola Shop Shonen SV, tengo una consulta.");
+      $("#ctWaNum").textContent = n.length === 11 ? "+" + n.slice(0, 3) + " " + n.slice(3, 7) + "-" + n.slice(7) : "+" + n;
+      wa.hidden = false;
+    }
     const f = { n: $("#cNombre"), c: $("#cCorreo"), e: $("#cEmpresa"), q: $("#cConsulta"), w: $("#cWeb") };
     const t = {};
     const rules = () => ({
