@@ -188,7 +188,20 @@
     const nav = $("#pager"); nav.textContent = "";
     if (pages <= 1) { nav.hidden = true; return; }
     nav.hidden = false;
-    const go = n => { page = n; renderGrid(); const top = $("#chips").getBoundingClientRect().top + window.scrollY - 90; window.scrollTo({ top, behavior: "smooth" }); };
+    const go = n => {
+      page = n; renderGrid();
+      requestAnimationFrame(() => {
+        // Lleva la vista al inicio del catálogo (buscador), descontando la barra superior fija
+        const target = $("#panel-pines .toolbar") || $("#grid");
+        const header = $("#topbar") ? $("#topbar").offsetHeight : 0;
+        const top = Math.max(0, target.getBoundingClientRect().top + window.scrollY - header - 12);
+        const root = document.documentElement, prev = root.style.scrollBehavior;
+        root.style.scrollBehavior = "auto";
+        window.scrollTo(0, top);
+        root.style.scrollBehavior = prev;
+        if (document.activeElement && document.activeElement.blur) document.activeElement.blur();
+      });
+    };
     nav.append(h("button", { type: "button", class: "pg pg-nav", disabled: page === 1, "aria-label": "Página anterior", onclick: () => go(page - 1) }, "‹"));
     for (let n = 1; n <= pages; n++) {
       nav.append(h("button", { type: "button", class: "pg", "aria-current": n === page ? "page" : null, "aria-label": "Página " + n, onclick: () => go(n) }, String(n)));
