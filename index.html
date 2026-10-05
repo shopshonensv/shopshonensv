@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap">
-<link rel="stylesheet" href="styles.css?v=20261005a">
+<link rel="stylesheet" href="styles.css?v=20261005b">
 </head>
 <body>
 <!--BODY-START-->
@@ -34,7 +34,9 @@
     </div>
     <button type="button" class="navlink" data-scroll="ubicacion">Ubicación</button>
     <button type="button" class="navlink" data-scroll="contacto">Contáctanos</button>
+    <div class="social social-menu" data-social hidden><span class="social-label">Síguenos</span></div>
   </nav>
+  <div class="social social-top" data-social hidden></div>
   <button type="button" class="cart-btn" id="cartBtn" aria-label="Abrir carrito, 0 productos">
     <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 4h2.2l2.1 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L20.6 8H6.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="19.5" r="1.6" fill="currentColor"/><circle cx="17" cy="19.5" r="1.6" fill="currentColor"/></svg>
     <span class="cart-label">Carrito</span>
@@ -109,6 +111,7 @@
       <div class="chips" id="chips" role="group" aria-label="Filtrar por temática"></div>
       <p class="result-count" id="resultCount" aria-live="polite"></p>
       <div class="grid" id="grid"></div>
+      <nav class="pager" id="pager" aria-label="Páginas del catálogo"></nav>
     </div>
 
     <!-- Panel Camisetas -->
@@ -194,6 +197,7 @@
 <footer class="footer">
   <img src="logo.webp" alt="Shop Shonen SV" width="96" height="96">
   <p>Hacemos tus ideas nuestra pasión.</p>
+  <div class="social social-foot" data-social hidden><span class="social-label">Síguenos</span></div>
   <p class="foot-small">Usamos tus datos únicamente para procesar y entregar tu pedido. No los compartimos ni los vendemos. <button type="button" class="linkish" id="privacyLink">Aviso de privacidad</button></p>
   <p class="foot-small"><a class="linkish" href="nosotros.html">Sobre nosotros</a></p>
   <p class="foot-small">© <span id="year">2026</span> Shop Shonen SV · El Salvador</p>
@@ -370,9 +374,9 @@
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <!--BODY-END-->
-<script src="config.js?v=20261005a"></script>
-<script src="data-productos.js?v=20261005a"></script>
-<script src="data-elsalvador.js?v=20261005a"></script>
-<script src="app.js?v=20261005a"></script>
+<script src="config.js?v=20261005b"></script>
+<script src="data-productos.js?v=20261005b"></script>
+<script src="data-elsalvador.js?v=20261005b"></script>
+<script src="app.js?v=20261005b"></script>
 </body>
 </html>

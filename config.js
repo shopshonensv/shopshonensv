@@ -8,6 +8,16 @@ window.SS_CONFIG = {
   // Número de WhatsApp del negocio, con código de país y sin signos. Ej.: "50370001234"
   WHATSAPP_NEGOCIO: "50366701511",
 
+  // Redes sociales: pega el enlace de cada perfil. Si alguno queda vacío, su ícono no se muestra.
+  REDES: {
+    INSTAGRAM: "",
+    FACEBOOK: "",
+    TIKTOK: ""
+  },
+
+  // Pines por página en el catálogo
+  PINES_POR_PAGINA: 20,
+
   // Costos de envío
   ENVIO_SAN_SALVADOR: 2.50,
   ENVIO_OTROS: 2.90,

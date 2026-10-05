@@ -64,6 +64,8 @@
   const byId = new Map();
   let cart = store.get("ss_cart", {});          // { P001: 2 }
   let filter = { q: "", cat: "Todas", only: false };
+  let page = 1;
+  const PAGE_SIZE = Math.max(4, parseInt(CFG.PINES_POR_PAGINA, 10) || 20);
   let selectedCard = null;
 
   function setProducts(list) {
@@ -83,22 +85,35 @@
   function saveCart() { store.set("ss_cart", cart); renderCartCount(); }
 
   // ---------- catálogo ----------
-  async function loadCatalog() {
+  // Muestra el catálogo al instante (datos guardados) y actualiza existencias en segundo plano.
+  async function loadCatalog(opts) {
+    opts = opts || {};
     const local = (window.SS_PRODUCTOS || []).slice();
     if (DEMO) {
       const demoStock = store.get("ss_demo_stock", null);
       if (demoStock) local.forEach(p => { if (p.id in demoStock) p.stock = demoStock[p.id]; });
-      setProducts(local); return;
+      setProducts(local); return true;
     }
-    try {
-      const r = await fetch(CFG.API_URL + "?action=catalogo", { method: "GET", cache: "no-store" });
-      const j = await r.json();
-      if (!j.ok || !Array.isArray(j.productos)) throw new Error("respuesta inválida");
-      setProducts(j.productos);
-    } catch (e) {
-      setProducts(local);
-      toast("No pudimos actualizar las existencias. Inténtalo de nuevo en un momento.");
+    if (!products.length) {
+      const cached = store.get("ss_cat_cache", null);
+      setProducts(Array.isArray(cached) && cached.length ? cached : local);
     }
+    const refresh = (async () => {
+      try {
+        const r = await fetch(CFG.API_URL + "?action=catalogo", { method: "GET", cache: "no-store" });
+        const j = await r.json();
+        if (!j.ok || !Array.isArray(j.productos)) throw new Error("respuesta inválida");
+        setProducts(j.productos);
+        store.set("ss_cat_cache", j.productos);
+        return true;
+      } catch (e) { return false; }
+    })();
+    if (opts.wait) return refresh;
+    refresh.then(ok => {
+      if (ok) { renderChips(); renderGrid(); if (current && !$("#detailOverlay").hidden) { current = byId.get(current.id) || current; updateDetailStock(); } }
+      else toast("No pudimos actualizar las existencias. Inténtalo de nuevo en un momento.");
+    });
+    return true;
   }
 
   function renderChips() {
@@ -108,7 +123,7 @@
     const wrap = $("#chips"); wrap.textContent = "";
     cats.forEach(c => wrap.append(h("button", {
       type: "button", class: "chip", "aria-pressed": String(filter.cat === c),
-      onclick: () => { filter.cat = c; renderChips(); renderGrid(); }
+      onclick: () => { filter.cat = c; page = 1; renderChips(); renderGrid(); }
     }, c, h("small", { text: c === "Todas" ? products.length : counts[c] }))));
     $("#pinesMeta").textContent = products.length + " diseños";
   }
@@ -126,13 +141,18 @@
       (!filter.only || p.stock > 0) &&
       (!q || norm(p.nombre + " " + p.descripcion + " " + p.categoria + " " + p.id).includes(q)));
     const grid = $("#grid"); grid.textContent = ""; selectedCard = null;
-    $("#resultCount").textContent = list.length === 1 ? "1 pin encontrado" : list.length + " pines encontrados";
+    const pages = Math.max(1, Math.ceil(list.length / PAGE_SIZE));
+    page = Math.min(Math.max(1, page), pages);
+    const from = (page - 1) * PAGE_SIZE, shown = list.slice(from, from + PAGE_SIZE);
+    $("#resultCount").textContent = list.length === 1 ? "1 pin encontrado"
+      : list.length + " pines encontrados" + (pages > 1 ? " · mostrando " + (from + 1) + "–" + (from + shown.length) : "");
+    renderPager(pages);
     if (!list.length) {
       grid.append(h("div", { class: "empty" }, h("b", { text: "No encontramos pines con esa búsqueda." }), h("br"), "Prueba con otra palabra o elige «Todas»."));
       return;
     }
     const frag = document.createDocumentFragment();
-    list.forEach(p => {
+    shown.forEach((p, i) => {
       const out = p.stock <= 0;
       const more = h("button", { type: "button", class: "btn btn-sun btn-wide", onclick: e => { e.stopPropagation(); openDetail(p.id); } }, "Ver más info.");
       const card = h("article", {
@@ -155,6 +175,38 @@
       frag.append(card);
     });
     grid.append(frag);
+  }
+
+  function renderPager(pages) {
+    const nav = $("#pager"); nav.textContent = "";
+    if (pages <= 1) { nav.hidden = true; return; }
+    nav.hidden = false;
+    const go = n => { page = n; renderGrid(); const top = $("#chips").getBoundingClientRect().top + window.scrollY - 90; window.scrollTo({ top, behavior: "smooth" }); };
+    nav.append(h("button", { type: "button", class: "pg pg-nav", disabled: page === 1, "aria-label": "Página anterior", onclick: () => go(page - 1) }, "‹"));
+    for (let n = 1; n <= pages; n++) {
+      nav.append(h("button", { type: "button", class: "pg", "aria-current": n === page ? "page" : null, "aria-label": "Página " + n, onclick: () => go(n) }, String(n)));
+    }
+    nav.append(h("button", { type: "button", class: "pg pg-nav", disabled: page === pages, "aria-label": "Página siguiente", onclick: () => go(page + 1) }, "›"));
+  }
+
+  // ---------- redes sociales ----------
+  const SOCIAL_ICONS = {
+    INSTAGRAM: ["Instagram", '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2.2"/><circle cx="17.4" cy="6.6" r="1.4" fill="currentColor"/></svg>'],
+    FACEBOOK: ["Facebook", '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M13.5 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H7.8v3h2.6V21h3.1Z"/></svg>'],
+    TIKTOK: ["TikTok", '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M16.6 3c.3 2.2 1.6 3.6 3.9 3.8v2.6c-1.4.1-2.7-.3-3.9-1.1v6.3c0 3.6-2.7 5.9-5.9 5.9A5.8 5.8 0 0 1 5 14.7c0-3.6 3-6.2 6.6-5.7v2.8c-1.8-.4-3.6.7-3.6 2.8 0 1.6 1.3 2.9 2.9 2.9 1.7 0 2.9-1.1 2.9-3.2V3h2.8Z"/></svg>']
+  };
+  function setupSocial() {
+    const redes = CFG.REDES || {};
+    const items = Object.keys(SOCIAL_ICONS).filter(k => /^https:\/\//.test(String(redes[k] || "")));
+    $$("[data-social]").forEach(box => {
+      if (!items.length) { box.hidden = true; return; }
+      items.forEach(k => {
+        const a = h("a", { class: "soc soc-" + k.toLowerCase(), href: redes[k], target: "_blank", rel: "noopener noreferrer", "aria-label": "Síguenos en " + SOCIAL_ICONS[k][0], title: SOCIAL_ICONS[k][0] });
+        a.innerHTML = SOCIAL_ICONS[k][1];
+        box.append(a);
+      });
+      box.hidden = false;
+    });
   }
 
   // ---------- pestañas de categoría ----------
@@ -434,7 +486,7 @@
       if (!res.ok) throw res;
       cart = {}; saveCart();
       showDone(res, payload);
-      await loadCatalog(); renderChips(); renderGrid();
+      await loadCatalog({ wait: true }); renderChips(); renderGrid();
     } catch (err) {
       const a = $("#formAlert"); a.hidden = false;
       if (err && err.agotados && err.agotados.length) {
@@ -586,9 +638,9 @@
     $("#year").textContent = new Date().getFullYear();
     demoBanner();
     if (CFG.FOTOS === "placeholder") document.body.classList.add("ph");
-    await loadCatalog();
+    loadCatalog();
     renderChips(); renderGrid(); renderCartCount();
-    setupZoom(); setupCheckout(); setupPlace(); setupContact();
+    setupZoom(); setupCheckout(); setupPlace(); setupContact(); setupSocial();
     $$("[data-scroll]").forEach(b => b.addEventListener("click", () => { closeDd(); const t = document.getElementById(b.dataset.scroll); if (t) t.scrollIntoView({ behavior: "smooth", block: "start" }); }));
 
     $$("[data-goto]").forEach(b => b.addEventListener("click", () => { closeDd(); showCat(b.dataset.goto, true); }));
@@ -624,8 +676,8 @@
       if (i < 0) return;
       const n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length]; n.focus(); n.click();
     });
-    let qt; $("#q").addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { filter.q = e.target.value; renderGrid(); }, 120); });
-    $("#onlyStock").addEventListener("change", e => { filter.only = e.target.checked; renderGrid(); });
+    let qt; $("#q").addEventListener("input", e => { clearTimeout(qt); qt = setTimeout(() => { filter.q = e.target.value; page = 1; renderGrid(); }, 120); });
+    $("#onlyStock").addEventListener("change", e => { filter.only = e.target.checked; page = 1; renderGrid(); });
 
     $("#dMinus").addEventListener("click", () => { dQty--; updateDetailStock(); });
     $("#dPlus").addEventListener("click", () => { dQty++; updateDetailStock(); });

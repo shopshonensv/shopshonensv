@@ -117,7 +117,7 @@ input,select{font:inherit;color:var(--ink)}
 .search:focus-within{box-shadow:0 0 0 3px var(--orange)}
 .only-stock{display:flex;gap:8px;align-items:center;font-weight:700}
 .only-stock input{width:20px;height:20px;accent-color:var(--teal)}
-.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 2px 10px;scrollbar-width:thin}
+.chips{display:flex;flex-wrap:wrap;gap:8px;padding:4px 2px 10px}
 .chip{flex:0 0 auto;border:2px solid var(--ink);background:var(--panel);border-radius:999px;padding:6px 14px;font-weight:700;font-size:.88rem;white-space:nowrap}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--sun)}
 .chip small{opacity:.65;margin-left:4px;font-variant-numeric:tabular-nums}
@@ -336,6 +336,27 @@ legend{font-weight:800;padding:0 8px;display:flex;align-items:center;gap:8px;fon
 .dd-item{background:none;border:0;text-align:left;padding:10px 12px;border-radius:8px;font-weight:800}
 .dd-item:hover,.dd-item:focus-visible{background:var(--sun)}
 
+/* ---------- Redes sociales ---------- */
+.social{display:flex;align-items:center;gap:8px}
+.social-top{margin-left:6px}
+.soc{display:inline-grid;place-items:center;width:40px;height:40px;border-radius:50%;border:2px solid var(--ink);background:var(--panel);color:var(--ink);box-shadow:2px 2px 0 var(--ink);transition:transform .12s,background .15s,color .15s}
+.soc:hover{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.soc-instagram:hover{background:#e1306c;color:#fff}
+.soc-facebook:hover{background:#1877f2;color:#fff}
+.soc-tiktok:hover{background:var(--ink);color:#fff}
+.social-label{font-weight:800;font-size:.9rem;margin-right:4px}
+.social-menu{display:none}
+.footer .social{justify-content:center;margin:6px 0}
+.footer .soc{background:var(--cream)}
+.footer .social-label{color:var(--cream)}
+
+/* ---------- Paginación ---------- */
+.pager{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px}
+.pg{min-width:44px;height:44px;padding:0 12px;border:2px solid var(--ink);border-radius:12px;background:var(--panel);font-weight:800;font-variant-numeric:tabular-nums;box-shadow:2px 2px 0 var(--ink)}
+.pg[aria-current="page"]{background:var(--sun);transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--ink)}
+.pg:disabled{opacity:.35;cursor:not-allowed;box-shadow:none}
+.pg-nav{font-size:1.3rem;line-height:1}
+
 /* ---------- Menú hamburguesa (tablet y celular) ---------- */
 .burger{display:none;width:48px;height:46px;border:var(--b);border-radius:12px;background:var(--sun);box-shadow:var(--sh-sm);padding:0;flex-direction:column;justify-content:center;align-items:center;gap:5px}
 .burger span{display:block;width:22px;height:3px;border-radius:2px;background:var(--ink);transition:transform .25s ease,opacity .2s ease}
@@ -344,6 +365,8 @@ legend{font-weight:800;padding:0 8px;display:flex;align-items:center;gap:8px;fon
 .burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
 @media (max-width:960px){
   .burger{display:inline-flex}
+  .social-top{display:none!important}
+  .topbar.menu-open .social-menu:not([hidden]){display:flex;padding:14px 6px 4px;border-top:2px solid var(--line);margin-top:4px}
   .cart-btn{margin-left:auto}
   .topnav{display:none;position:absolute;top:100%;left:0;right:0;margin:0;flex-direction:column;align-items:stretch;gap:0;background:var(--paper);border-bottom:var(--b);padding:6px var(--gut) 14px;box-shadow:0 10px 0 rgba(20,32,42,.08);animation:menuIn .22s ease}
   .topbar.menu-open .topnav{display:flex}
