@@ -536,7 +536,7 @@
     $("#donePay").textContent = payload.pago === "Transferencia"
       ? "Pago por transferencia: un asesor se comunicará contigo por WhatsApp para completar el pago. Tu pedido queda reservado."
       : "Pago contra entrega: ten listo " + money(res.total) + " en efectivo al recibir tu pedido.";
-    const tel = "+503 " + payload.cliente.whatsapp.slice(3, 7) + "-" + payload.cliente.whatsapp.slice(7);
+    const tel = "+503\u00A0" + payload.cliente.whatsapp.slice(3, 7) + "\u2011" + payload.cliente.whatsapp.slice(7);
     $("#doneWa").textContent = res.whatsapp === "enviado"
       ? "Te enviamos la confirmación por WhatsApp al " + tel + "."
       : res.whatsapp === "demo"
@@ -582,7 +582,7 @@
       const n = String(CFG.WHATSAPP_NEGOCIO).replace(/\D/g, "");
       const wa = $("#ctWa");
       wa.href = "https://wa.me/" + n + "?text=" + encodeURIComponent("Hola Shop Shonen SV, tengo una consulta.");
-      $("#ctWaNum").textContent = n.length === 11 ? "+" + n.slice(0, 3) + " " + n.slice(3, 7) + "-" + n.slice(7) : "+" + n;
+      $("#ctWaNum").textContent = n.length === 11 ? "+" + n.slice(0, 3) + "\u00A0" + n.slice(3, 7) + "\u2011" + n.slice(7) : "+" + n;
       wa.hidden = false;
     }
     const f = { n: $("#cNombre"), c: $("#cCorreo"), e: $("#cEmpresa"), q: $("#cConsulta"), w: $("#cWeb") };
