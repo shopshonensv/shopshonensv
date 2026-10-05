@@ -346,6 +346,11 @@ legend{font-weight:800;padding:0 8px;display:flex;align-items:center;gap:8px;fon
 .soc-tiktok:hover{background:var(--ink);color:#fff}
 .social-label{font-weight:800;font-size:.9rem;margin-right:4px}
 .social-menu{display:none}
+.hero-social{margin-top:30px;animation:pop .6s cubic-bezier(.2,1.6,.4,1) 1s both}
+.hero-social-txt{margin:0 0 10px;font-weight:800;font-size:clamp(1rem,2vw,1.15rem);color:#fff;text-shadow:2px 2px 0 var(--ink)}
+.social-hero{gap:12px}
+.social-hero .soc{width:50px;height:50px;background:var(--cream);border:3px solid var(--ink);box-shadow:3px 3px 0 var(--ink)}
+.social-hero .soc svg{width:24px;height:24px}
 .footer .social{justify-content:center;margin:6px 0}
 .footer .soc{background:var(--cream)}
 .footer .social-label{color:var(--cream)}

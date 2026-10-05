@@ -207,6 +207,7 @@
       });
       box.hidden = false;
     });
+    const hs = $("#heroSocial"); if (hs) hs.hidden = !items.length;
   }
 
   // ---------- pestañas de categoría ----------
