@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<!--CSP-START-->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://drive.google.com https://*.googleusercontent.com; frame-src https://www.google.com https://maps.google.com; connect-src https://script.google.com https://script.googleusercontent.com; frame-ancestors 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="description" content="Shop Shonen SV: pines y merch inspirados en el anime y la cultura pop. Pedidos en línea, pago contra entrega y envíos a todo El Salvador.">
+<link rel="icon" href="img/logo.webp">
+<!--CSP-END-->
+<title>Shop Shonen SV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bangers&family=Dela+Gothic+One&family=M+PLUS+Rounded+1c:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!--BODY-START-->
+<a class="skip" href="#catalogo">Ir al catálogo</a>
+
+<header class="topbar" id="topbar">
+  <a class="brand" href="#inicio" aria-label="Shop Shonen SV, inicio">
+    <img src="img/logo.webp" alt="Shop Shonen" width="120" height="120">
+  </a>
+  <nav class="topnav" id="topnav" aria-label="Secciones">
+    <a class="navlink" href="nosotros.html">Sobre nosotros</a>
+    <div class="dd" id="ddTienda">
+      <button type="button" class="navlink dd-btn" id="ddBtn" aria-expanded="false" aria-controls="ddMenu">Tienda <svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M2 4.5 6 8.5 10 4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      <div class="dd-menu" id="ddMenu" hidden>
+        <button type="button" class="dd-item" data-goto="pines">Pines</button>
+        <button type="button" class="dd-item" data-goto="camisetas">Camisetas</button>
+      </div>
+    </div>
+    <button type="button" class="navlink" data-scroll="ubicacion">Ubicación</button>
+    <button type="button" class="navlink" data-scroll="contacto">Contáctanos</button>
+  </nav>
+  <button type="button" class="cart-btn" id="cartBtn" aria-label="Abrir carrito, 0 productos">
+    <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path d="M3 4h2.2l2.1 10.2a2 2 0 0 0 2 1.6h7.6a2 2 0 0 0 2-1.5L20.6 8H6.4" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="19.5" r="1.6" fill="currentColor"/><circle cx="17" cy="19.5" r="1.6" fill="currentColor"/></svg>
+    <span class="cart-label">Carrito</span>
+    <span class="cart-count" id="cartCount">0</span>
+  </button>
+  <button type="button" class="burger" id="burger" aria-expanded="false" aria-controls="topnav" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<main id="inicio">
+  <!-- HERO: escena animada -->
+  <section class="hero" aria-labelledby="heroTitle">
+    <div class="hero-lines" aria-hidden="true"></div>
+    <div class="hero-dots" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="hero-copy">
+        <h1 id="heroTitle" class="hero-title" aria-label="Hacemos tus ideas nuestra pasión">
+          <span class="w" style="--i:0">Hacemos</span>
+          <span class="w" style="--i:1">tus</span>
+          <span class="w hl" style="--i:2">ideas</span>
+          <span class="w" style="--i:3">nuestra</span>
+          <span class="w hl2" style="--i:4">pasión</span>
+        </h1>
+        <div class="hero-ctas">
+          <button type="button" class="btn btn-sun" data-goto="pines">Ver pines</button>
+          <button type="button" class="btn btn-ghost" data-goto="camisetas">Camisetas</button>
+        </div>
+      </div>
+      <div class="hero-stage" aria-hidden="true">
+        <div class="burst"></div>
+        <span class="sfx sfx1">¡ZAS!</span>
+        <span class="sfx sfx2">ドン</span>
+        <img class="mascot" src="img/mascota.webp" alt="" width="640" height="636">
+        <div class="bubble">¡Arma tu pedido!</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="how" aria-labelledby="howTitle">
+    <h2 id="howTitle" class="section-title"><span>Así de fácil es comprar</span></h2>
+    <ol class="steps">
+      <li><b>Elige</b><span>Toca un pin y revisa su info.</span></li>
+      <li><b>Agrega</b><span>Suma al carrito los que quieras.</span></li>
+      <li><b>Registra</b><span>Completa tus datos de entrega.</span></li>
+      <li><b>Recibe</b><span>Te confirmamos por WhatsApp y coordinamos.</span></li>
+    </ol>
+  </section>
+
+  <!-- Categorías -->
+  <section class="cats" id="catalogo" aria-labelledby="catsTitle">
+    <h2 id="catsTitle" class="section-title"><span>Elige tu categoría</span></h2>
+    <div class="cat-tabs" role="tablist" aria-label="Categorías de producto">
+      <button type="button" class="cat-tab" role="tab" id="tab-pines" aria-controls="panel-pines" aria-selected="true" data-cat="pines">
+        <span class="cat-num">01</span>
+        <span class="cat-name">Pines</span>
+        <span class="cat-meta" id="pinesMeta">64 diseños</span>
+      </button>
+      <button type="button" class="cat-tab" role="tab" id="tab-camisetas" aria-controls="panel-camisetas" aria-selected="false" data-cat="camisetas">
+        <span class="cat-num">02</span>
+        <span class="cat-name">Camisetas</span>
+        <span class="cat-meta">Muy pronto</span>
+      </button>
+    </div>
+
+    <!-- Panel Pines -->
+    <div class="panel" role="tabpanel" id="panel-pines" aria-labelledby="tab-pines">
+      <div class="toolbar">
+        <label class="search">
+          <span class="sr">Buscar pin</span>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="m20 20-4-4" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"/></svg>
+          <input type="search" id="q" placeholder="Busca: Stitch, Snoopy, Star Wars…" autocomplete="off" maxlength="40">
+        </label>
+        <label class="only-stock"><input type="checkbox" id="onlyStock"> Solo disponibles</label>
+      </div>
+      <div class="chips" id="chips" role="group" aria-label="Filtrar por temática"></div>
+      <p class="result-count" id="resultCount" aria-live="polite"></p>
+      <div class="grid" id="grid"></div>
+    </div>
+
+    <!-- Panel Camisetas -->
+    <div class="panel" role="tabpanel" id="panel-camisetas" aria-labelledby="tab-camisetas" hidden>
+      <div class="soon">
+        <img src="img/mascota.webp" alt="" class="soon-mascot" width="640" height="636">
+        <div class="soon-bubble">
+          <p class="soon-msg">Muy pronto estaremos actualizando el catálogo de productos</p>
+          <p class="soon-sign">Atentamente: <b>Shop Shonen SV</b></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Ubicación -->
+  <section class="place" id="ubicacion" aria-labelledby="placeTitle">
+    <h2 id="placeTitle" class="section-title"><span>¿Dónde estamos?</span></h2>
+    <div class="place-grid">
+      <div class="map" id="map"></div>
+      <div class="place-card">
+        <p class="place-kicker">Shop Shonen SV</p>
+        <p class="place-addr" id="placeAddr"></p>
+        <h3 class="place-h">Horario</h3>
+        <dl class="hours" id="hours"></dl>
+        <div class="place-actions">
+          <a class="btn btn-sun btn-wide" id="mapDirections" href="#" target="_blank" rel="noopener noreferrer">Cómo llegar</a>
+          <a class="btn btn-ghost-dark btn-wide" id="mapOpen" href="#" target="_blank" rel="noopener noreferrer">Ver en Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contáctanos -->
+  <section class="contact" id="contacto" aria-labelledby="contactTitle">
+    <div class="contact-wrap">
+      <div class="contact-intro">
+        <h2 id="contactTitle" class="contact-title">Contáctanos</h2>
+        <p class="contact-lead">¿Buscas un diseño especial, pedidos al por mayor o merch para tu empresa o evento? Escríbenos y te respondemos a la brevedad.</p>
+        <img src="img/mascota.webp" alt="" class="contact-mascot" width="640" height="636">
+      </div>
+      <form class="contact-form" id="ctForm" novalidate>
+        <div class="field">
+          <label for="cNombre">Nombre</label>
+          <input id="cNombre" name="nombre" autocomplete="name" maxlength="80" required>
+          <p class="err" id="ecNombre"></p>
+        </div>
+        <div class="field">
+          <label for="cCorreo">Correo electrónico</label>
+          <input id="cCorreo" name="correo" type="email" autocomplete="email" maxlength="120" placeholder="tucorreo@ejemplo.com" required>
+          <p class="err" id="ecCorreo"></p>
+        </div>
+        <div class="field">
+          <label for="cEmpresa">Empresa <span class="opt">(opcional)</span></label>
+          <input id="cEmpresa" name="empresa" autocomplete="organization" maxlength="100" aria-describedby="cEmpresaHint">
+          <p class="field-hint" id="cEmpresaHint">Si eres persona natural, no es necesario llenarlo.</p>
+        </div>
+        <div class="field">
+          <label for="cConsulta">Tu consulta</label>
+          <textarea id="cConsulta" name="consulta" rows="5" maxlength="1000" placeholder="Cuéntanos qué necesitas: producto, cantidad, fecha…" required></textarea>
+          <p class="field-hint counter" id="cCount">0 / 1000</p>
+          <p class="err" id="ecConsulta"></p>
+        </div>
+        <div class="hp" aria-hidden="true"><label>No llenar <input id="cWeb" name="web" tabindex="-1" autocomplete="off"></label></div>
+        <p class="form-alert" id="ctAlert" role="alert" hidden></p>
+        <button type="submit" class="btn btn-sun btn-wide" id="ctSubmit">Enviar consulta</button>
+        <p class="field-hint">Usamos tus datos solo para responder tu consulta. <button type="button" class="linkish" data-privacy>Aviso de privacidad</button></p>
+      </form>
+      <div class="contact-done" id="ctDone" hidden>
+        <p class="done-kicker">¡Consulta enviada!</p>
+        <h3 class="contact-done-title">Gracias, <span id="ctDoneName"></span></h3>
+        <p>Recibimos tu mensaje y te responderemos al correo <b id="ctDoneMail"></b>.</p>
+        <button type="button" class="btn btn-ghost-dark" id="ctAgain">Enviar otra consulta</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <img src="img/logo.webp" alt="Shop Shonen SV" width="96" height="96">
+  <p>Hacemos tus ideas nuestra pasión.</p>
+  <p class="foot-small">Usamos tus datos únicamente para procesar y entregar tu pedido. No los compartimos ni los vendemos. <button type="button" class="linkish" id="privacyLink">Aviso de privacidad</button></p>
+  <p class="foot-small"><a class="linkish" href="nosotros.html">Sobre nosotros</a></p>
+  <p class="foot-small">© <span id="year">2026</span> Shop Shonen SV · El Salvador</p>
+</footer>
+
+<!-- Modal: detalle de producto -->
+<div class="overlay" id="detailOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dName" id="detail">
+    <button type="button" class="x" data-close aria-label="Cerrar">×</button>
+    <div class="d-media">
+      <div class="zoom" id="zoom" tabindex="0" role="button" aria-label="Toca para hacer zoom">
+        <img id="dImg" alt="">
+        <span class="zoom-hint" id="zoomHint">Toca la foto para hacer zoom</span>
+      </div>
+    </div>
+    <div class="d-info">
+      <p class="d-code" id="dCode"></p>
+      <h3 class="d-name" id="dName"></h3>
+      <p class="d-price" id="dPrice"></p>
+      <div class="d-tabs" role="tablist">
+        <button type="button" role="tab" aria-selected="true" class="d-tab" id="dTabDesc">Descripción</button>
+      </div>
+      <p class="d-desc" id="dDesc"></p>
+      <p class="d-stock" id="dStock"></p>
+      <div class="d-buy" id="dBuy">
+        <div class="qty" aria-label="Cantidad">
+          <button type="button" id="dMinus" aria-label="Quitar uno">−</button>
+          <output id="dQty">1</output>
+          <button type="button" id="dPlus" aria-label="Agregar uno">+</button>
+        </div>
+        <button type="button" class="btn btn-sun btn-wide" id="dAdd">Añadir al carrito</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Carrito lateral -->
+<div class="drawer-back" id="drawerBack" hidden></div>
+<aside class="drawer" id="drawer" aria-labelledby="drawerTitle" aria-hidden="true" inert>
+  <div class="drawer-head">
+    <h2 id="drawerTitle">Tu carrito</h2>
+    <button type="button" class="x" id="drawerClose" aria-label="Cerrar carrito">×</button>
+  </div>
+  <p class="drawer-toast" id="drawerToast" role="status" aria-live="polite"></p>
+  <div class="drawer-body" id="cartList"></div>
+  <div class="drawer-foot">
+    <div class="sum-row total"><span>Total de la compra</span><b id="cartTotal">$0.00</b></div>
+    <p class="hint">El envío se calcula al completar tus datos.</p>
+    <button type="button" class="btn btn-ghost-dark btn-wide" id="keepShopping">Continuar comprando</button>
+    <button type="button" class="btn btn-sun btn-wide" id="goCheckout">Completar compra</button>
+  </div>
+</aside>
+
+<!-- Pestaña de checkout -->
+<section class="checkout" id="checkout" aria-labelledby="coTitle" hidden>
+  <div class="co-bar">
+    <button type="button" class="back" id="coBack">← Volver a la tienda</button>
+    <img src="img/logo.webp" alt="Shop Shonen" width="64" height="64">
+  </div>
+  <div class="co-wrap" id="coWrap">
+    <form class="co-form" id="coForm" novalidate autocomplete="on">
+      <h2 id="coTitle">Completa tu registro de compra</h2>
+      <p class="co-sub">Todos los campos son obligatorios. Los usamos solo para entregarte tu pedido.</p>
+
+      <fieldset>
+        <legend><span class="lg-num">1</span> ¿Quién recibe?</legend>
+        <div class="field">
+          <label for="fNombre">Nombre completo</label>
+          <input id="fNombre" name="nombre" autocomplete="name" maxlength="80" required>
+          <p class="err" id="eNombre"></p>
+        </div>
+        <div class="field">
+          <label for="fWhats">Contacto de WhatsApp</label>
+          <div class="phone"><span class="pfx">+503</span><input id="fWhats" name="whatsapp" inputmode="numeric" autocomplete="tel-national" placeholder="7000-0000" maxlength="9" required></div>
+          <p class="err" id="eWhats"></p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="lg-num">2</span> ¿Dónde entregamos?</legend>
+        <div class="field">
+          <label for="fDepto">Departamento</label>
+          <select id="fDepto" name="departamento" required><option value="">Selecciona un departamento</option></select>
+          <p class="err" id="eDepto"></p>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label for="fMuni">Municipio</label>
+            <select id="fMuni" name="municipio" required disabled><option value="">Primero elige el departamento</option></select>
+            <p class="err" id="eMuni"></p>
+          </div>
+          <div class="field">
+            <label for="fDist">Distrito</label>
+            <select id="fDist" name="distrito" required disabled><option value="">Primero elige el municipio</option></select>
+            <p class="err" id="eDist"></p>
+          </div>
+        </div>
+        <div class="field">
+          <label for="fDir">Dirección</label>
+          <input id="fDir" name="direccion" autocomplete="street-address" maxlength="160" placeholder="Colonia, calle, pasaje, número de casa" required>
+          <p class="err" id="eDir"></p>
+        </div>
+        <div class="field">
+          <label for="fRef">Punto de referencia</label>
+          <input id="fRef" name="referencia" maxlength="120" placeholder="Ej.: frente a la tienda Don Beto, portón negro" required>
+          <p class="err" id="eRef"></p>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span class="lg-num">3</span> ¿Cómo pagas?</legend>
+        <div class="pay">
+          <label class="pay-opt"><input type="radio" name="pago" value="Contra entrega" required>
+            <span><b>Contra entrega</b><small>Pagas en efectivo cuando recibes tu pedido.</small></span></label>
+          <label class="pay-opt"><input type="radio" name="pago" value="Transferencia">
+            <span><b>Pago por transferencia</b><small>Transferencia bancaria antes del envío.</small></span></label>
+        </div>
+        <p class="pay-note" id="payNote" hidden>Un asesor se comunicará contigo por WhatsApp para completar el pago. Tu pedido queda reservado mientras tanto.</p>
+        <p class="err" id="ePago"></p>
+      </fieldset>
+
+      <!-- Campo trampa contra bots: las personas no lo ven -->
+      <div class="hp" aria-hidden="true"><label>No llenar <input id="fWeb" name="web" tabindex="-1" autocomplete="off"></label></div>
+
+      <label class="consent"><input type="checkbox" id="fConsent" required>
+        <span>Acepto que Shop Shonen SV use mis datos solo para gestionar y entregar este pedido y contactarme por WhatsApp. <button type="button" class="linkish" data-privacy>Leer aviso</button></span></label>
+      <p class="err" id="eConsent"></p>
+
+      <p class="form-alert" id="formAlert" role="alert" hidden></p>
+    </form>
+
+    <aside class="co-summary" aria-labelledby="sumTitle">
+      <h3 id="sumTitle">Resumen del pedido</h3>
+      <div id="coItems" class="co-items"></div>
+      <div class="sum-row"><span>Subtotal</span><b id="coSub">$0.00</b></div>
+      <div class="sum-row"><span>Envío <small id="coShipLbl">(elige departamento)</small></span><b id="coShip">—</b></div>
+      <div class="sum-row total"><span>Total a pagar</span><b id="coTotal">$0.00</b></div>
+      <button type="submit" form="coForm" class="btn btn-sun btn-wide" id="coSubmit" disabled>Completar registro de compra</button>
+      <p class="missing" id="coMissing" aria-live="polite"></p>
+      <p class="secure"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M7 10V7a5 5 0 0 1 10 0v3" fill="none" stroke="currentColor" stroke-width="2.2"/><rect x="4.5" y="10" width="15" height="11" rx="2.5" fill="currentColor"/></svg> Conexión cifrada. No pedimos datos de tarjeta.</p>
+    </aside>
+  </div>
+
+  <!-- Confirmación -->
+  <div class="done" id="done" hidden>
+    <img src="img/mascota.webp" alt="" class="done-mascot" width="640" height="636">
+    <div class="done-card">
+      <p class="done-kicker">¡Pedido registrado!</p>
+      <h2 class="done-title">Gracias, <span id="doneName"></span></h2>
+      <p class="done-id">Número de pedido: <b id="doneId"></b></p>
+      <div id="doneItems" class="co-items"></div>
+      <div class="sum-row"><span>Envío</span><b id="doneShip"></b></div>
+      <div class="sum-row total"><span>Total</span><b id="doneTotal"></b></div>
+      <p class="done-pay" id="donePay"></p>
+      <p class="done-wa" id="doneWa"></p>
+      <a class="btn btn-wa btn-wide" id="doneChat" href="#" target="_blank" rel="noopener noreferrer">Escribirle a Shop Shonen por WhatsApp</a>
+      <button type="button" class="btn btn-ghost-dark btn-wide" id="doneBack">Seguir viendo productos</button>
+    </div>
+  </div>
+</section>
+
+<!-- Aviso de privacidad -->
+<div class="overlay" id="privacyOverlay" hidden>
+  <div class="modal modal-text" role="dialog" aria-modal="true" aria-labelledby="pvTitle">
+    <button type="button" class="x" data-close aria-label="Cerrar">×</button>
+    <h3 id="pvTitle">Aviso de privacidad</h3>
+    <p><b>Qué datos pedimos:</b> nombre, número de WhatsApp, dirección, punto de referencia y método de pago. No pedimos ni guardamos datos de tarjetas ni contraseñas.</p>
+    <p><b>Para qué:</b> registrar tu pedido, apartar tus productos, coordinar la entrega y enviarte la confirmación por WhatsApp.</p>
+    <p><b>Quién los ve:</b> solo el equipo de Shop Shonen SV y la persona que realiza la entrega. No los vendemos ni los compartimos con terceros para publicidad.</p>
+    <p><b>Cuánto tiempo:</b> conservamos los datos del pedido mientras sea necesario para la entrega y el control de ventas.</p>
+    <p><b>Tus derechos:</b> puedes pedir que corrijamos o eliminemos tus datos escribiéndonos por WhatsApp.</p>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<!--BODY-END-->
+<script src="config.js"></script>
+<script src="data-productos.js"></script>
+<script src="data-elsalvador.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
