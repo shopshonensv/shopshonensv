@@ -10,9 +10,9 @@ window.SS_CONFIG = {
 
   // Redes sociales: pega el enlace de cada perfil. Si alguno queda vacío, su ícono no se muestra.
   REDES: {
-    INSTAGRAM: "",
-    FACEBOOK: "",
-    TIKTOK: ""
+    INSTAGRAM: "https://www.instagram.com/shopshonen.sv/",
+    FACEBOOK: "https://www.facebook.com/share/18eX2UZQn5/",
+    TIKTOK: "https://www.tiktok.com/@shop.shonen.sv"
   },
 
   // Pines por página en el catálogo
