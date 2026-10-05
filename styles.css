@@ -115,7 +115,11 @@ input,select{font:inherit;color:var(--ink)}
 .search input{flex:1;width:100%;border:0;background:transparent;min-width:0;padding:10px 0;font-size:1rem}
 .search input:focus{outline:none}
 .search:focus-within{box-shadow:0 0 0 3px var(--orange)}
-.only-stock{display:flex;gap:8px;align-items:center;font-weight:700}
+.filter-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.cat-select{display:none}
+.cat-select select{width:100%;min-height:46px;border:2px solid var(--ink);border-radius:999px;background:var(--panel);color:var(--ink);font:inherit;font-weight:800;font-size:16px;padding:0 40px 0 16px;appearance:none;-webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12'%3E%3Cpath d='M2 4.5 6 8.5 10 4.5' fill='none' stroke='%2314202a' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;background-size:14px}
+.cat-select select:focus{outline:none;box-shadow:0 0 0 3px var(--orange)}
+.only-stock{display:flex;gap:8px;align-items:center;font-weight:700;white-space:nowrap}
 .only-stock input{width:20px;height:20px;accent-color:var(--teal)}
 .chips{display:flex;flex-wrap:wrap;gap:8px;padding:4px 2px 10px}
 .chip{flex:0 0 auto;border:2px solid var(--ink);background:var(--panel);border-radius:999px;padding:6px 14px;font-weight:700;font-size:.88rem;white-space:nowrap}
@@ -432,6 +436,12 @@ section[id]{scroll-margin-top:90px}
 @media (max-width:720px){
   .map{min-height:260px}
   section[id]{scroll-margin-top:120px}
+}
+/* Celular y tablet: temáticas en una lista desplegable para ahorrar espacio */
+@media (max-width:720px){
+  .chips{display:none}
+  .filter-row{width:100%;flex-wrap:nowrap}
+  .cat-select{display:block;flex:1;min-width:0}
 }
 /* Celular: que ningún texto se corte */
 @media (max-width:520px){

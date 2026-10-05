@@ -125,6 +125,13 @@
       type: "button", class: "chip", "aria-pressed": String(filter.cat === c),
       onclick: () => { filter.cat = c; page = 1; renderChips(); renderGrid(); }
     }, c, h("small", { text: c === "Todas" ? products.length : counts[c] }))));
+    const sel = $("#catSelect");
+    if (sel) {
+      sel.textContent = "";
+      cats.forEach(c => sel.append(h("option", { value: c, text: (c === "Todas" ? "Todas las temáticas" : c) + " (" + (c === "Todas" ? products.length : counts[c]) + ")" })));
+      sel.value = filter.cat;
+      sel.onchange = () => { filter.cat = sel.value; page = 1; renderChips(); renderGrid(); };
+    }
     $("#pinesMeta").textContent = products.length + " diseños";
   }
 
