@@ -15,9 +15,9 @@ window.SS_CONFIG = {
   // Máximo de unidades por producto en un pedido
   MAX_POR_PRODUCTO: 10,
 
-  // Fotos: "local" usa las fotos optimizadas de la carpeta img/pines/ (P001.webp… y mini/P001.webp…).
+  // Fotos: "local" usa las fotos optimizadas que están junto a index.html (P001.webp = grande, P001-m.webp = miniatura).
   //        "drive" usa las fotos públicas de Google Drive por su ID (columna FotoDriveID).
-  // Para un pin nuevo: guarda su foto cuadrada como img/pines/P065.webp (1200 px) y img/pines/mini/P065.webp (480 px).
+  // Para un pin nuevo: sube su foto cuadrada como P065.webp (1200 px) y P065-m.webp (480 px).
   FOTOS: "local",
 
   // Ubicación (tomada de tu ficha de Google Maps "Shop Shonen SV")

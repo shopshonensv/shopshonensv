@@ -50,7 +50,7 @@
   function imgSrc(p, size) {
     if (CFG.FOTOS === "placeholder" || !p.foto && CFG.FOTOS === "drive") return placeholder(p);
     if (CFG.FOTOS === "embed" && window.SS_FOTOS && window.SS_FOTOS[p.id]) return window.SS_FOTOS[p.id];
-    if (CFG.FOTOS === "local") return "img/pines/" + ((size || 600) <= 500 ? "mini/" : "") + encodeURIComponent(p.id) + ".webp";
+    if (CFG.FOTOS === "local") return encodeURIComponent(p.id) + ((size || 600) <= 500 ? "-m" : "") + ".webp";
     return "https://drive.google.com/thumbnail?id=" + encodeURIComponent(p.foto) + "&sz=w" + (size || 600);
   }
   function productImg(p, size, cls) {
